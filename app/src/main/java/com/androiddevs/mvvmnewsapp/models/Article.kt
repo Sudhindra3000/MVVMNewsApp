@@ -1,7 +1,10 @@
 package com.androiddevs.mvvmnewsapp.models
 
+import android.widget.ImageView
+import androidx.databinding.BindingAdapter
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.bumptech.glide.Glide
 
 @Entity(tableName = "articles")
 data class Article(
@@ -15,4 +18,13 @@ data class Article(
     val title: String,
     val url: String,
     val urlToImage: String
-)
+) {
+    companion object {
+        @BindingAdapter("android:loadArticleImage")
+        fun loadArticleImage(imageView: ImageView, url: String) {
+            Glide.with(imageView)
+                .load(url)
+                .into(imageView)
+        }
+    }
+}
